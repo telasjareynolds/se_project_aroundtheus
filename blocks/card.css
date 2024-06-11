@@ -16,6 +16,7 @@
   padding-bottom: 25px;
   margin: 0;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -26,6 +27,7 @@
   margin-left: 28px;
   border-style: none;
   padding-right: 21px;
+  margin-right: 20px;
 }
 
 .card__like-button:hover {
