@@ -1,21 +1,21 @@
-# Project 3: Around The U.S.
+# Around The U.S.
 
-### Overview  
+This is project 3 of the Software Engineering program at TripleTen. It was created using HTML and CSS, following a figma design. It has a profile section with a customizable title, description, and button that allows for adding personalized images. If you are looking to create a profile where all you'll need to do is add your own personal touch, this ready to use template will make the process seamless!
 
-* Intro  
-* Figma  
-* Images  
-  
-**Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)  
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+## Project features
+
+- Semantic HTML5
+- Flexbox
+- Positioning
+- Flat BEM file structure
+- Grid
+- Media Queries
+- Responsive for desktop, tablet, and mobile
+
+## Plan on improving the project
+
+Make the project functional in the future using JavaScript. In the future, I'd also like to implement a search bar and add functionality. This will help to easily find a specific card if many cards are added.
+
+GitHub Page's URL https://telasjareynolds.github.io/se_project_aroundtheus/
+
+Video overview of project:
