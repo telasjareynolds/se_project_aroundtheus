@@ -24,6 +24,7 @@
   "description description";
   grid-template-columns: minmax(auto, 415px) auto;
   align-items: center;
+  max-width: 415px;
 }
 
 .profile__heading {
@@ -35,6 +36,9 @@
   grid-area: title;
   margin: 0;
   padding-bottom: 7px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__edit-button {
@@ -73,7 +77,7 @@
   padding-bottom: 0;
 }
 
-@media screen and (max-width: 550px) {
+ @media screen and (max-width: 775px) {
   .profile {
     flex-direction: column;
     text-align: center;
@@ -82,7 +86,7 @@
 
   .profile__info {
     width: 100%;
-    max-width: 320px;
+    max-width: 282px;
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
@@ -132,9 +136,9 @@
   .profile {
     padding: 0;
     margin-top: 42;
-  }
+ }
 
   .profile__info {
     max-width: 282px;
   }
-}
+} 
