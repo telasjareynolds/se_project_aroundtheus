@@ -6,9 +6,9 @@
   bottom: 0;
   background: rgb(0, 0, 0, 0.5);
   z-index: 999;
-  display: none;
   padding-left: 19px;
-  padding-right: 19px;
+  padding-right: 19px; 
+  display: none;
 }
 
 .modal_opened {
@@ -40,6 +40,10 @@
   bottom: calc(100% + 3px);
   left: calc(100% + 3px);
   border-color: transparent;
+}
+
+.modal__close:hover {
+  opacity: 50%;
 }
 
 .modal__title {
