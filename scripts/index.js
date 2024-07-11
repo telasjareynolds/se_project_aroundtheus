@@ -47,9 +47,8 @@ const jobInput = document.querySelector('.modal__description');
 
 const profileName = document.querySelector('#profile_name');
 const profileJob = document.querySelector('#profile_job');
-const cardListTem = document.querySelector('.cards__list');
-const cardTemplate = document.querySelector('#card-template').content.firstElementChild;
-const cardAltTem = '';
+const cardTemplate = document.querySelector('#card-template').content;
+const cardContainter = document.querySelector('.cards__list');
 /*-----------------------------------------------------------------*/
 /*                           Functions                             */
 /*-----------------------------------------------------------------*/
@@ -57,14 +56,13 @@ function closePopup() {
   profileEditModal.classList.remove('modal_opened');
 }
 
-
 function getCardElement (data) {
-  const cardElement = cardTemplate.querySelector.cloneNode(true);
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardImageTem = cardElement.querySelector('.card__image');
-  const cardTitleTem = cardElement.querySelector('.card__description');
+  const cardTitleTem = cardElement.querySelector('.card__header');
   cardTitleTem.textContent = data.name;
-  cardImageTem.textContent = data.link;
-  cardAltTem.textContent = data.name;
+  cardImageTem.src = data.link;
+  cardTitleTem.alt = data.name;
   return cardElement;
 }
 
@@ -91,12 +89,8 @@ closeEditForm.addEventListener('click', function () {
 
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 
-intialCards.forEach((data) => {
+
+initialCards.forEach((data) => {
   const cardElement = getCardElement(data);
-  cardListTem.prepend(cardElement);
-});
-// for (let i = 0; i <= initialCards.length; i++) {
-//   const card = intialCards[i];
-//   const cardElement = getCardElement(data);
-//   cardListTem.prepend(cardElement);
-// }
+  cardContainter.prepend(cardElement);
+})
