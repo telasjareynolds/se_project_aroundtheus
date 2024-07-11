@@ -33,16 +33,47 @@ const initialCards = [
  }
 ];
 
-console.log(initialCards);
-
+/*-----------------------------------------------------------------*/
+/*                            Elements                             */
+/*-----------------------------------------------------------------*/
 const buttonEdit = document.querySelector('#js-edit-button');
 const profileEditModal = document.querySelector('#profile-edit-modal');
 const closeEditForm = document.querySelector('#close-edit-btn');
 
+const profileFormElement = profileEditModal.querySelector('.modal__form');
+
+const nameInput = document.querySelector('.modal__heading');
+const jobInput = document.querySelector('.modal__description');
+
+const profileName = document.querySelector('#profile_name');
+const profileJob = document.querySelector('#profile_job');
+/*-----------------------------------------------------------------*/
+/*                           Functions                             */
+/*-----------------------------------------------------------------*/
+function closePopup() {
+  profileEditModal.classList.remove('modal_opened');
+}
+
+/*-----------------------------------------------------------------*/
+/*                         Event Handlers                          */
+/*-----------------------------------------------------------------*/
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopup();
+}
+
+/*-----------------------------------------------------------------*/
+/*                         Event Listeners                         */
+/*-----------------------------------------------------------------*/
 buttonEdit.addEventListener('click', function () {
   profileEditModal.classList.add('modal_opened');
 });
 
 closeEditForm.addEventListener('click', function () {
-  profileEditModal.classList.remove('modal_opened');
+  closePopup();
 });
+
+profileFormElement.addEventListener('submit', handleProfileFormSubmit);
+
