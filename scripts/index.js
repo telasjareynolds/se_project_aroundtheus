@@ -47,6 +47,9 @@ const jobInput = document.querySelector('.modal__description');
 
 const profileName = document.querySelector('#profile_name');
 const profileJob = document.querySelector('#profile_job');
+const cardListTem = document.querySelector('.cards__list');
+const cardTemplate = document.querySelector('#card-template').content.firstElementChild;
+const cardAltTem = '';
 /*-----------------------------------------------------------------*/
 /*                           Functions                             */
 /*-----------------------------------------------------------------*/
@@ -54,16 +57,27 @@ function closePopup() {
   profileEditModal.classList.remove('modal_opened');
 }
 
+
+function getCardElement (data) {
+  const cardElement = cardTemplate.querySelector.cloneNode(true);
+  const cardImageTem = cardElement.querySelector('.card__image');
+  const cardTitleTem = cardElement.querySelector('.card__description');
+  cardTitleTem.textContent = data.name;
+  cardImageTem.textContent = data.link;
+  cardAltTem.textContent = data.name;
+  return cardElement;
+}
+
 /*-----------------------------------------------------------------*/
 /*                         Event Handlers                          */
 /*-----------------------------------------------------------------*/
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup();
 }
-
 /*-----------------------------------------------------------------*/
 /*                         Event Listeners                         */
 /*-----------------------------------------------------------------*/
@@ -77,3 +91,12 @@ closeEditForm.addEventListener('click', function () {
 
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 
+intialCards.forEach((data) => {
+  const cardElement = getCardElement(data);
+  cardListTem.prepend(cardElement);
+});
+// for (let i = 0; i <= initialCards.length; i++) {
+//   const card = intialCards[i];
+//   const cardElement = getCardElement(data);
+//   cardListTem.prepend(cardElement);
+// }
