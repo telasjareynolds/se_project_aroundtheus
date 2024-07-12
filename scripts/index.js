@@ -42,8 +42,8 @@ const closeEditForm = document.querySelector('#close-edit-btn');
 
 const profileFormElement = profileEditModal.querySelector('.modal__form');
 
-const nameInput = document.querySelector('.modal__heading');
-const jobInput = document.querySelector('.modal__description');
+const nameInput = document.querySelector("[name='title']");
+const jobInput = document.querySelector("[name='description']");
 
 const profileName = document.querySelector('#profile_name');
 const profileJob = document.querySelector('#profile_job');
