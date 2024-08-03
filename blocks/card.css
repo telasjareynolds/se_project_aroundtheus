@@ -12,7 +12,7 @@
   object-fit: cover;
 }
 
-.card_trash-buttion {
+.card_trash-button {
   position: absolute;
   background: url(../images/Trash.svg) no-repeat;
   right: 15px;
@@ -21,6 +21,10 @@
   height: 19.3px;
   border-style: none;
   cursor: pointer;
+}
+
+.card_trash-button:hover {
+  opacity: 60%;
 }
 
 .card__description {

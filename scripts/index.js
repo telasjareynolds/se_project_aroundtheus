@@ -40,6 +40,7 @@ const buttonEdit = document.querySelector('#js-edit-button');
 const buttonAdd = document.querySelector('#js-add-button');
 const closeEditForm = document.querySelector('#close-edit-btn');
 const closeAddForm = document.querySelector('#close-add-btn');
+const previewImageCloseBtn = document.querySelector('#close-preview-btn');
 
 const profileEditModal = document.querySelector('#profile-edit-modal');
 const profileFormElement = profileEditModal.querySelector('.modal__form');
@@ -50,6 +51,10 @@ const addCardModal = document.querySelector('#add-card-modal');
 const addFormElement = addCardModal.querySelector('.modal__form');
 const addCardForm = addCardModal.querySelector("#add-card-form"); 
 const addSubmitButton = addFormElement.querySelector(".js-submit-btn");
+
+const previewImageModal = document.querySelector('#modal-preview-img');
+const previewImageElement = document.querySelector('.js-modal-img-preview');
+const previewImageCaption = previewImageModal.querySelector('#js-preview-caption');
 
 const nameInput = profileEditModal.querySelector("[name='title']");
 const jobInput = profileEditModal.querySelector("[name='description']");
@@ -76,6 +81,8 @@ function getCardElement (data) {
   cardTitleTem.textContent = data.name;
   cardImageTem.src = data.link;
   cardTitleTem.alt = data.name;
+  cardImageTem.style.backgroundImage = `url(${data.link})`;
+
   const likeBtns = cardElement.querySelector('.card__like-button');
   likeBtns.addEventListener('click', () => {
     likeBtns.classList.toggle('card__like-button_active');
@@ -84,8 +91,14 @@ function getCardElement (data) {
 cardDeleteBtn.addEventListener('click', () => {
   cardElement.remove();
 });
-  //add click listner to the card image element
-    //openModal with previewImageModal
+ 
+  cardImageTem.addEventListener('click', () => {
+    previewImageElement.src = data.link;
+    previewImageCaption.textContent = data.name;
+    previewImageElement.alt = data.name;
+    previewImageModal.classList.add('modal_opened');
+  })
+ 
   return cardElement;
 }
 
@@ -117,6 +130,10 @@ closeEditForm.addEventListener('click', function () {
 
 closeAddForm.addEventListener('click', function () {
   closePopup(addCardModal);
+});
+
+previewImageCloseBtn.addEventListener('click', () => {
+  closePopup(previewImageModal);
 });
 
 
