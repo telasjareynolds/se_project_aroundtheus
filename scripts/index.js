@@ -37,23 +37,36 @@ const initialCards = [
 /*                            Elements                             */
 /*-----------------------------------------------------------------*/
 const buttonEdit = document.querySelector('#js-edit-button');
-const profileEditModal = document.querySelector('#profile-edit-modal');
+const buttonAdd = document.querySelector('#js-add-button');
 const closeEditForm = document.querySelector('#close-edit-btn');
+const closeAddForm = document.querySelector('#close-add-btn');
 
+const profileEditModal = document.querySelector('#profile-edit-modal');
 const profileFormElement = profileEditModal.querySelector('.modal__form');
-
-const nameInput = document.querySelector("[name='title']");
-const jobInput = document.querySelector("[name='description']");
-
 const profileName = document.querySelector('#profile_name');
 const profileJob = document.querySelector('#profile_job');
+
+const addCardModal = document.querySelector('#add-card-modal');
+const addFormElement = addCardModal.querySelector('.modal__form');
+const addCardForm = addCardModal.querySelector("#add-card-form"); 
+const addSubmitButton = addFormElement.querySelector(".js-submit-btn");
+
+const nameInput = profileEditModal.querySelector("[name='title']");
+const jobInput = profileEditModal.querySelector("[name='description']");
+const titleInput = addCardModal.querySelector("[name='title']");
+const linkInput = addCardModal.querySelector("[name='link']");
+
 const cardTemplate = document.querySelector('#card-template').content;
 const cardContainter = document.querySelector('.cards__list');
 /*-----------------------------------------------------------------*/
 /*                           Functions                             */
 /*-----------------------------------------------------------------*/
-function closePopup() {
-  profileEditModal.classList.remove('modal_opened');
+function closePopup(modal) {
+  modal.classList.remove('modal_opened');
+}
+
+function renderCard(cardElement, cardContainter) {
+  cardContainter.prepend(cardElement);
 }
 
 function getCardElement (data) {
@@ -63,6 +76,16 @@ function getCardElement (data) {
   cardTitleTem.textContent = data.name;
   cardImageTem.src = data.link;
   cardTitleTem.alt = data.name;
+  const likeBtns = cardElement.querySelector('.card__like-button');
+  likeBtns.addEventListener('click', () => {
+    likeBtns.classList.toggle('card__like-button_active');
+  });
+  const cardDeleteBtn = cardElement.querySelector('#card-delete-btn');
+cardDeleteBtn.addEventListener('click', () => {
+  cardElement.remove();
+});
+  //add click listner to the card image element
+    //openModal with previewImageModal
   return cardElement;
 }
 
@@ -74,8 +97,9 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closePopup();
+  closePopup(profileEditModal);
 }
+
 /*-----------------------------------------------------------------*/
 /*                         Event Listeners                         */
 /*-----------------------------------------------------------------*/
@@ -83,14 +107,34 @@ buttonEdit.addEventListener('click', function () {
   profileEditModal.classList.add('modal_opened');
 });
 
-closeEditForm.addEventListener('click', function () {
-  closePopup();
+buttonAdd.addEventListener('click', function () {
+  addCardModal.classList.add('modal_opened');
 });
 
-profileFormElement.addEventListener('submit', handleProfileFormSubmit);
+closeEditForm.addEventListener('click', function () {
+  closePopup(profileEditModal);
+});
 
+closeAddForm.addEventListener('click', function () {
+  closePopup(addCardModal);
+});
+
+
+profileFormElement.addEventListener('submit', handleProfileFormSubmit); 
+
+addCardForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = titleInput.value;
+  const link = linkInput.value;
+  const cardElement = getCardElement({
+    name,
+    link
+  });
+  renderCard(cardElement, cardContainter);
+  closePopup(addCardModal);
+});
 
 initialCards.forEach((data) => {
   const cardElement = getCardElement(data);
-  cardContainter.prepend(cardElement);
-})
+  renderCard(cardElement, cardContainter);
+});

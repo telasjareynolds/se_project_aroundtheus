@@ -31,7 +31,7 @@
             ></button>
             <p class="profile__description" id="profile_job">Explorer</p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button class="profile__add-button" id="js-add-button" type="button"></button>
         </section>
         <section class="cards">
           <ul class="cards__list"></ul>
@@ -62,6 +62,29 @@
         </form>
       </div>
     </div>
+
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container">
+        <button class="modal__close" id="close-add-btn" type="button"></button>
+        <p class="modal__title">New place</p>
+        <form class="modal__form" id="add-card-form">
+          <input
+            type="text"
+            name="title"
+            class="modal__input"
+            placeholder="Title"
+          />
+          <input
+            type="text"
+            name="link"
+            class="modal__input"
+            placeholder="Image link"
+          />
+          <button type="submit js-add-btn" class="modal__button">Create</button>
+        </form>
+      </div>
+    </div>
+
     <template id="card-template">
       <li class="card">
         <img
@@ -69,9 +92,11 @@
           alt=""
           class="card__image"
         />
+        <button class="card_trash-buttion" id="card-delete-btn"
+        type="button"></button>
         <div class="card__description">
           <h2 class="card__header"></h2>
-          <button class="card__like-button" type="button"></button>
+          <button class="card__like-button"  type="button"></button>
         </div>
       </li>
     </template>

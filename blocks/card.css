@@ -3,12 +3,24 @@
   flex-direction: column;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
 
 .card__image {
   width: 282px;
   height: 282px;
   object-fit: cover;
+}
+
+.card_trash-buttion {
+  position: absolute;
+  background: url(../images/Trash.svg) no-repeat;
+  right: 15px;
+  top: 18px;
+  width: 18px;
+  height: 19.3px;
+  border-style: none;
+  cursor: pointer;
 }
 
 .card__description {
@@ -40,6 +52,10 @@
 
 .card__like-button:hover {
   opacity: 0.5;
+}
+
+.card__like-button_active {
+  background: url(../images/like-btn-active.svg) center no-repeat;
 }
 
 .card__header {
