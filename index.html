@@ -43,9 +43,9 @@
     </div>
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close" id="close-edit-btn" type="button"></button>
+        <button class="modal__close" type="button"></button>
         <p class="modal__title">Edit Profile</p>
-        <form class="modal__form">
+        <form class="modal__form" name="profile-form">
           <input
             type="text"
             name="title"
@@ -65,9 +65,9 @@
 
     <div class="modal" id="add-card-modal">
       <div class="modal__container">
-        <button class="modal__close" id="close-add-btn" type="button"></button>
+        <button class="modal__close" type="button"></button>
         <p class="modal__title">New place</p>
-        <form class="modal__form" id="add-card-form">
+        <form class="modal__form" name="card-form" id="add-card-form">
           <input
             type="text"
             name="title"
@@ -87,8 +87,8 @@
 
     <figure>
     <div class="modal" id="modal-preview-img">
-      <div class="model__container modal__container_type_preview">
-        <button class="modal__close" id="close-preview-btn" type="button"></button>
+      <div class="modal__container modal__container_type_preview">
+        <button class="modal__close" type="button"></button>
         <img src="" alt="" class="modal_preview-link js-modal-img-preview">
         <figcaption class="modal__preview-img-name"   id="js-preview-caption" name="title"></figcaption>
       </div>
