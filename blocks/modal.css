@@ -119,13 +119,13 @@
   top: 90px;
 }
 
-.modal__preview_link {
+.modal__container_link {
   max-height: 100%;
   max-width: 100%;
   object-fit: cover;
   }
 
-  .modal__preview-img-name {
+  .modal__container-img-name {
     width: 291px;
     height: 12px;
     font-weight: 400px;
