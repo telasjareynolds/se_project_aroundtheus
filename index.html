@@ -31,7 +31,11 @@
             ></button>
             <p class="profile__description" id="profile_job">Explorer</p>
           </div>
-          <button class="profile__add-button" id="js-add-button" type="button"></button>
+          <button
+            class="profile__add-button"
+            id="js-add-button"
+            type="button"
+          ></button>
         </section>
         <section class="cards">
           <ul class="cards__list"></ul>
@@ -45,20 +49,40 @@
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
         <p class="modal__title">Edit Profile</p>
-        <form class="modal__form" name="profile-form">
-          
-          <input
-            type="text"
-            name="title"
-            class="modal__input"
-            placeholder="Jacques Cousteau" value="Jacques Cousteau"
-          />
-          <input
-            type="text"
-            name="description"
-            class="modal__input"
-            placeholder="Explorer" value="Explorer"
-          />
+        <!---- Profile Modal ---->
+        <form class="modal__form js-modal-form" name="profile-form" novalidate>
+          <label class="modal__label">
+            <input
+              required
+              type="text"
+              name="title"
+              class="modal__input"
+              id="profile-name"
+              placeholder="Name"
+              value="Jacques Cousteau"
+              minlength="2"
+              maxlength="40"
+            />
+            <span class="modal__error" id="profile-name-error"
+              >Please fill out this field.</span
+            >
+          </label>
+          <label class="modal__label">
+            <input
+              required
+              type="text"
+              name="description"
+              id="profile-title"
+              class="modal__input"
+              placeholder="About me"
+              value="Explorer"
+              minlength="2"
+              maxlength="200"
+            />
+            <span class="modal__error" id="profile-title-error"
+              >Please enter a web address.</span
+            >
+          </label>
           <button type="submit" class="modal__button">Save</button>
         </form>
       </div>
@@ -68,49 +92,75 @@
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
         <p class="modal__title">New place</p>
-        <form class="modal__form" name="card-form" id="add-card-form">
-          <input
-            type="text"
-            name="title"
-            class="modal__input"
-            placeholder="Title"
-          />
-          <input
-            type="text"
-            name="link"
-            class="modal__input"
-            placeholder="Image link"
-          />
-          <button type="submit js-add-btn" class="modal__button">Create</button>
+        <!---- New Card Modal ---->
+        <form
+          class="modal__form js-modal-form"
+          name="card-form"
+          id="add-card-form"
+          novalidate
+        >
+          <label class="modal__label">
+            <input
+              required
+              type="text"
+              name="title"
+              class="modal__input"
+              id="card-name"
+              placeholder="Title"
+              minlength="1"
+              maxlength="30"
+            />
+            <span class="modal__error" id="card-name-error"
+              >Please fill out this field.</span
+            >
+          </label>
+          <label class="modal__label">
+            <input
+              required
+              type="url"
+              name="link"
+              class="modal__input"
+              id="card-link"
+              placeholder="Image link"
+            />
+            <span class="modal__error" id="card-link-error"
+              >Please enter a web address.</span
+            >
+          </label>
+          <button type="submit js-add-btn" class="modal__button" disabled>Create</button>
         </form>
       </div>
     </div>
 
     <figure>
-    <div class="modal" id="modal-preview-img">
-      <div class="modal__container modal__container_type_preview">
-        <button class="modal__close" type="button"></button>
-        <img src="" alt="" class="modal__link js-modal-img-preview">
-        <figcaption class="modal__img"   id="js-preview-caption" name="title"></figcaption>
+      <div class="modal" id="modal-preview-img">
+        <div class="modal__container modal__container_type_preview">
+          <button class="modal__close" type="button"></button>
+          <img src="" alt="" class="modal__link js-modal-img-preview" />
+          <figcaption
+            class="modal__img"
+            id="js-preview-caption"
+            name="title"
+          ></figcaption>
+        </div>
       </div>
-    </div>
     </figure>
-    
+
     <template id="card-template">
       <li class="card">
-        <img
-          src=""
-          alt=""
-          class="card__image"
-        />
-        <button class="card_trash-button" id="card-delete-btn"
-        type="button"></button>
+        <img src="" alt="" class="card__image" />
+        <button
+          class="card_trash-button"
+          id="card-delete-btn"
+          type="button"
+        ></button>
         <div class="card__description">
           <h2 class="card__header"></h2>
-          <button class="card__like-button"  type="button"></button>
+          <button class="card__like-button" type="button"></button>
         </div>
       </li>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>

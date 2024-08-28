@@ -150,3 +150,17 @@ initialCards.forEach((data) => {
   const cardElement = getCardElement(data);
   renderCard(cardElement, cardContainter);
 });
+
+//close popup on click to overlay or "esc" press
+const clickClosePopUp = () => {
+  const overlay = document.querySelectorAll(".modal__opened");
+  const popup = document.querySelector('.modal');
+  overlay.addEventListener("click", closePopup(popup));
+  overlay.addEventListener("keydown", function (evt) {
+if (!(evt.keyCode === "27")) {
+  closePopup(popup);
+}
+  });
+};
+
+clickClosePopUp();
