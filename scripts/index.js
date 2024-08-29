@@ -61,11 +61,15 @@ const linkInput = addCardModal.querySelector("[name='link']");
 
 const cardTemplate = document.querySelector('#card-template').content;
 const cardContainter = document.querySelector('.cards__list');
+
+const popups = document.querySelectorAll('.modal');
 /*-----------------------------------------------------------------*/
 /*                           Functions                             */
 /*-----------------------------------------------------------------*/
 function closePopup(modal) {
   modal.classList.remove('modal_opened');
+  document.removeEventListener("keydown", handleEscClose);
+  modal.removeEventListener("mousedown", clickClosePopUp);
 }
 
 function renderCard(cardElement, cardContainter) {
@@ -102,7 +106,9 @@ function getCardElement (data) {
 
   function openPopup(popup) {
     popup.classList.add('modal_opened');
-}
+    document.addEventListener("keydown", handleEscClose);
+    popup.addEventListener("mousedown", clickClosePopUp);
+};
 
 /*-----------------------------------------------------------------*/
 /*                         Event Handlers                          */
@@ -151,16 +157,24 @@ initialCards.forEach((data) => {
   renderCard(cardElement, cardContainter);
 });
 
-//close popup on click to overlay or "esc" press
-const clickClosePopUp = () => {
-  const overlay = document.querySelectorAll(".modal__opened");
-  const popup = document.querySelector('.modal');
-  overlay.addEventListener("click", closePopup(popup));
-  overlay.addEventListener("keydown", function (evt) {
-if (!(evt.keyCode === "27")) {
-  closePopup(popup);
-}
-  });
-};
 
-clickClosePopUp();
+
+//close popup on click to overlay or "esc" press
+function clickClosePopUp(evt) {
+  if (evt.target.classList.contains("modal_opened")) {
+    closePopup(evt.target);
+  }
+}
+
+function handleEscClose(evt) {
+  if (evt.key === "Escape") {
+    const modalOpened = document.querySelector(".modal_opened");
+    closePopup(modalOpened);
+  }
+}
+
+
+
+
+
+

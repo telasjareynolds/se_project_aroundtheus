@@ -7,9 +7,9 @@ const options = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
-  inactiveButtonClass: ".modal__button_disabled",
-  inputErrorClass: ".modal__input_type_error",
-  errorClass: ".modal__error_visible"
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible"
 };
 
 /*-----------------------------------------------------------------*/
@@ -65,7 +65,7 @@ function setEventListeners(formElement, options) {
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", (e) => {
       checkInputValidity(formElement, inputElement, options);
-      toggleButtonState(inputElement, buttonElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
