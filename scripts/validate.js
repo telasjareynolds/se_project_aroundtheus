@@ -61,7 +61,7 @@ const toggleButtonState = (inputList, buttonElement, options) => {
 
 function setEventListeners(formElement, options) {
   const inputList = Array.from(formElement.querySelectorAll(options.inputSelector));
-  const buttonElement = formElement.querySelector(".modal__button");
+  const buttonElement = formElement.querySelector(options.submitButtonSelector);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", (e) => {
       checkInputValidity(formElement, inputElement, options);
