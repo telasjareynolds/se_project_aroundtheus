@@ -1,3 +1,6 @@
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
 const initialCards = [
   {
     name: "Delijan, Iran",
@@ -32,6 +35,7 @@ const initialCards = [
     link: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
  }
 ];
+
 
 /*-----------------------------------------------------------------*/
 /*                            Elements                             */
@@ -77,22 +81,22 @@ function renderCard(cardElement, cardContainter) {
 }
 
 
-function getCardElement (data) {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  const cardImage = cardElement.querySelector('.card__image');
-  const cardTitle = cardElement.querySelector('.card__header');
-  cardTitle.textContent = data.name;
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
+// function getCardElement (data) {
+//   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+//   const cardImage = cardElement.querySelector('.card__image');
+//   const cardTitle = cardElement.querySelector('.card__header');
+//   cardTitle.textContent = data.name;
+//   cardImage.src = data.link;
+//   cardImage.alt = data.name;
 
-  const likeBtn = cardElement.querySelector('.card__like-button');
-  likeBtn.addEventListener('click', () => {
-    likeBtn.classList.toggle('card__like-button_active');
-  });
-  const cardDeleteBtn = cardElement.querySelector('#card-delete-btn');
-  cardDeleteBtn.addEventListener('click', () => {
-    cardElement.remove();
-});
+  // const likeBtn = cardElement.querySelector('.card__like-button');
+  // likeBtn.addEventListener('click', () => {
+  //   likeBtn.classList.toggle('card__like-button_active');
+  // });
+  // const cardDeleteBtn = cardElement.querySelector('#card-delete-btn');
+//   cardDeleteBtn.addEventListener('click', () => {
+//     cardElement.remove();
+// });
  
   cardImage.addEventListener('click', () => {
     previewImageElement.src = data.link;
