@@ -1,20 +1,22 @@
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleImageClick) {
       this._cardSelector = cardSelector;  
       this._name = data.name;
       this._link = data.link;
       this._handleImageClick = handleImageClick;
   }
-  handleImageClick() {
+
+  _handleImageClick() {
     this._element.querySelector('.card__image').addEventListener('click', () => {
-      previewImageElement.src = data.link;
-      previewImageCaption.textContent = data.name;
-      previewImageElement.alt = data.name;
+      this._element.querySelector('.js-modal-img-preview').src = this._link;
+      this._element.querySelector('#js-preview-caption').textContent = this._name;
+      this._element.querySelector('.js-modal-img-preview').alt = this._name;
       openPopup(previewImageModal);
+      this._element.querySelector('#modal-preview-img').classList.add('modal_opened');
     })
   }
   _setEventListeners() {
-      this._cardImageElement.addEventListener('click', () => {
+      this._element.addEventListener('click', () => {
       this._handleImageClick(this);
       });
 
@@ -23,21 +25,28 @@ export default class Card {
 
       this._element.querySelector("#card-delete-btn").addEventListener('click', () =>
         this._handleCardDelete);
+
+      this._element.querySelector('.card__image').addEventListener('click', () => this._handleImageClick);
   }
 
   _handleCardLike() {
       this._element.querySelector(".card__like-button").classList.toggle('card__like-button_active');
-      console.log("hello");
+  
   }
 
   _handleCardDelete() {
       this._element.querySelector("#card-delete-btn").remove();
   }
-  renderCard() {
+
+  _getTemplate() {
+return document.querySelector(this._cardSelector).content.querySelector(".card").cloneNode(true);
+  }
+
+  cardView() {
    // get the card view
    // set event listeners
    // return the card
-   this._element.querySelector('.card').cloneNode(true);
+   this._element = this._getTemplate();
    
    this._element.querySelector('.card__header').textContent = this._name;
    this._element.querySelector('.card__image').src = `url(${this._link})`;
