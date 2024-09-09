@@ -1,6 +1,8 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 
+const cardSelector = '#card-template';
+
 const initialCards = [
   {
     name: "Delijan, Iran",
@@ -51,22 +53,18 @@ const profileJob = document.querySelector('#profile_job');
 
 const addCardModal = document.querySelector('#add-card-modal');
 const cardForm = document.forms["card-form"];
-const cardModalCloseBtn = addCardModal.querySelector("#add-card-form"); 
-const addSubmitButton = cardForm.querySelector(".js-submit-btn");
 
-// const previewImageModal = document.querySelector('#modal-preview-img');
-// const previewImageElement = document.querySelector('.js-modal-img-preview');
-// const previewImageCaption = previewImageModal.querySelector('#js-preview-caption');
+const previewImageModal = document.querySelector('#modal-preview-img');
+const previewImageElement = document.querySelector('.js-modal-img-preview');
+const previewImageCaption = previewImageModal.querySelector('#js-preview-caption');
 
 const nameInput = profileEditModal.querySelector("[name='title']");
 const jobInput = profileEditModal.querySelector("[name='description']");
 const titleInput = addCardModal.querySelector("[name='title']");
 const linkInput = addCardModal.querySelector("[name='link']");
 
-const cardTemplate = document.querySelector('#card-template').content;
 const cardContainer = document.querySelector('.cards__list');
 
-const popups = document.querySelectorAll('.modal');
 /*-----------------------------------------------------------------*/
 /*                           Functions                             */
 /*-----------------------------------------------------------------*/
@@ -77,37 +75,19 @@ function closePopup(modal) {
 }
 
 function renderCard(data, cardContainer) {
-  const card = new Card(data, cardSelector);
+  const card = new Card(data, cardSelector, handleImageClick);
   cardContainer.prepend(card.cardView());
 }
 
-
-// function getCardElement (data) {
-//   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-//   const cardImage = cardElement.querySelector('.card__image');
-//   const cardTitle = cardElement.querySelector('.card__header');
-//   cardTitle.textContent = data.name;
-//   cardImage.src = data.link;
-//   cardImage.alt = data.name;
-
-  // const likeBtn = cardElement.querySelector('.card__like-button');
-  // likeBtn.addEventListener('click', () => {
-  //   likeBtn.classList.toggle('card__like-button_active');
-  // });
-  // const cardDeleteBtn = cardElement.querySelector('#card-delete-btn');
-//   cardDeleteBtn.addEventListener('click', () => {
-//     cardElement.remove();
-// });
- 
-//   cardImage.addEventListener('click', () => {
-//     previewImageElement.src = data.link;
-//     previewImageCaption.textContent = data.name;
-//     previewImageElement.alt = data.name;
-//     openPopup(previewImageModal);
-//   })
- 
-//   return cardElement;
-// }
+// declare a handleImageClick function
+//    give it the content from the previous handler
+// then pass the function to Card.js
+function handleImageClick(data) {
+      previewImageElement.src = data.link;
+      previewImageCaption.textContent = data.name;
+      previewImageElement.alt = data.name;
+      openPopup(previewImageModal);
+}
 
   function openPopup(popup) {
     popup.classList.add('modal_opened');
@@ -158,8 +138,7 @@ cardForm.addEventListener('submit', (evt) => {
 });
 
 initialCards.forEach((card) => {
-  const cardElement = new Card(card, cardSelector).renderCard();
-  renderCard(cardElement, cardContainer);
+  renderCard(card, cardContainer);
 });
 
 
@@ -179,6 +158,25 @@ function handleEscClose(evt) {
 }
 
 
+/*                         Validation                          */
+/*-----------------------------------------------------------------*/
+const settings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible"
+}; 
+
+const editFormSelector = profileEditModal.querySelector('.js-modal-form');
+const addFormSelector = addCardModal.querySelector('.js-modal-form')
+
+const editFormValidator = new FormValidator(settings, editFormSelector);
+editFormValidator.enableValidation();
+
+const addFormValidator = new FormValidator(settings, addFormSelector);
+addFormValidator.enableValidation();
 
 
 
