@@ -128,11 +128,8 @@ cardForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const name = titleInput.value;
   const link = linkInput.value;
-  const cardElement = new Card({
-    name,
-    link
-  });
-  renderCard(cardElement, cardContainer);
+  const cardData = {name, link};
+  renderCard(cardData, cardContainer);
   closePopup(addCardModal);
   cardForm.reset();
 });

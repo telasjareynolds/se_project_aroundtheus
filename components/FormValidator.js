@@ -40,12 +40,13 @@ export default class FormValidator {
   _toggleButtonState() {
     const buttonElement = this._form.querySelector(this._submitButtonSelector);
 
-    if (this._hasInvalidInput) {
+    if (this._hasInvalidInput()) {
       buttonElement.classList.add(this._inactiveButtonClass);
       buttonElement.disabled = true;;
-     } 
+     } else {
      buttonElement.classList.remove(this._inactiveButtonClass);
      buttonElement.disabled = false;
+     }
    };
 
   _setEventListeners() {
