@@ -74,9 +74,14 @@ function closePopup(modal) {
   modal.removeEventListener("mousedown", clickClosePopUp);
 }
 
+function createCard(data) {
+  const cardElement = new Card(data, cardSelector, handleImageClick);
+  return cardElement.cardView();
+}
+
 function renderCard(data, cardContainer) {
-  const card = new Card(data, cardSelector, handleImageClick);
-  cardContainer.prepend(card.cardView());
+  const card = createCard(data);
+  cardContainer.prepend(card);
 }
 
 // declare a handleImageClick function
@@ -111,6 +116,7 @@ function handleProfileFormSubmit(evt) {
 /*-----------------------------------------------------------------*/
 buttonEdit.addEventListener('click', function () {
   openPopup(profileEditModal);
+  resetValidation();
 });
 
 buttonAdd.addEventListener('click', function () {
@@ -166,14 +172,21 @@ const settings = {
   errorClass: "modal__error_visible"
 }; 
 
-const editFormSelector = profileEditModal.querySelector('.js-modal-form');
-const addFormSelector = addCardModal.querySelector('.js-modal-form')
+const formValidators = {}
 
-const editFormValidator = new FormValidator(settings, editFormSelector);
-editFormValidator.enableValidation();
+const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(settings, formElement)
+   const formName = formElement.getAttribute('name');
 
-const addFormValidator = new FormValidator(settings, addFormSelector);
-addFormValidator.enableValidation();
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  })
+}
+
+enableValidation(settings);
+
 
 
 
