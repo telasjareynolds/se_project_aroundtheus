@@ -116,7 +116,6 @@ function handleProfileFormSubmit(evt) {
 /*-----------------------------------------------------------------*/
 buttonEdit.addEventListener('click', function () {
   openPopup(profileEditModal);
-  resetValidation();
 });
 
 buttonAdd.addEventListener('click', function () {
