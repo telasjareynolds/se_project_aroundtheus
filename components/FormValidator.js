@@ -50,6 +50,12 @@ export default class FormValidator {
      }
    };
 
+   _disableButton() {
+    const buttonElement = this._form.querySelector(this._submitButtonSelector);
+    buttonElement.classList.add(this._inactiveButtonClass);
+      buttonElement.disabled = true;
+   }
+
   _setEventListeners() {
     const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
     this._toggleButtonState();
