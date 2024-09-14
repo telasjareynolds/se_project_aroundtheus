@@ -73,7 +73,5 @@ export default class FormValidator {
         evt.preventDefault();
       });
       this._setEventListeners();
-     
     };
-
   }
