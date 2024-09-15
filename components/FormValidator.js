@@ -37,23 +37,24 @@ export default class FormValidator {
       return inputElement.validity.valid || !inputElement.value.trim() === ''
     });
   }
-
+  
+  disableButton() {
+   const buttonElement = this._form.querySelector(this._submitButtonSelector);
+   buttonElement.classList.add(this._inactiveButtonClass);
+     buttonElement.disabled = true;
+  }
+  
   _toggleButtonState() {
     const buttonElement = this._form.querySelector(this._submitButtonSelector);
    
     if (this._hasInvalidInput()) {
-      disableButton();
+      this.disableButton();
      } else {
      buttonElement.classList.remove(this._inactiveButtonClass);
      buttonElement.disabled = false;
      }
    };
 
-   disableButton() {
-    const buttonElement = this._form.querySelector(this._submitButtonSelector);
-    buttonElement.classList.add(this._inactiveButtonClass);
-      buttonElement.disabled = true;
-   }
 
   _setEventListeners() {
     const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
