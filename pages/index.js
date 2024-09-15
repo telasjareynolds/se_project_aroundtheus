@@ -137,7 +137,7 @@ cardForm.addEventListener('submit', (evt) => {
   renderCard(cardData, cardContainer);
   closePopup(addCardModal);
   cardForm.reset();
-  formValidators["card-form"]._disableButton();
+  formValidators["card-form"].disableButton();
 });
 
 initialCards.forEach((card) => {

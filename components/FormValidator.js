@@ -42,15 +42,14 @@ export default class FormValidator {
     const buttonElement = this._form.querySelector(this._submitButtonSelector);
    
     if (this._hasInvalidInput()) {
-      buttonElement.classList.add(this._inactiveButtonClass);
-      buttonElement.disabled = true;
+      disableButton();
      } else {
      buttonElement.classList.remove(this._inactiveButtonClass);
      buttonElement.disabled = false;
      }
    };
 
-   _disableButton() {
+   disableButton() {
     const buttonElement = this._form.querySelector(this._submitButtonSelector);
     buttonElement.classList.add(this._inactiveButtonClass);
       buttonElement.disabled = true;
