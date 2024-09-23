@@ -11,8 +11,6 @@ import {
   titleInput,
   buttonAdd,
   linkInput,
-  profileName,
-  profileJob,
   nameInput,
   jobInput,
 } from "../utils/constants.js";
