@@ -30,12 +30,6 @@ function createCard(data) {
   return cardElement.cardView();
 }
 
-function renderCard(data, cardContainer) {
-  const card = createCard(data);
-  cardContainer.prepend(card);
-}
-
-
 /*-----------------------------------------------------------------*/
 /*                         Validation                          */
 /*-----------------------------------------------------------------*/
@@ -61,22 +55,20 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (data) => {
-      const cardEl = new Card(data, cardSelector, (imgData) => {
-        imagePopup.open(imgData);
-      });
-      cardSection.addItem(cardEl.cardView());
+      cardSection.addItem(createCard(data));
     },
   },
   cardContainer
 );
-cardSection.renderItems(initialCards);
+cardSection.renderItems();
 
 // UserInfo class instance 
 const userInfo = new UserInfo({profileName: "#profile_name", profileJob: "#profile_job"});
 
 // Edit modal instance
 const popupWithEditForm = new PopupWithForm("#profile-edit-modal", () => {
-  userInfo.setUserInfo();
+  const formData = popupWithEditForm._getInputValues();
+  userInfo.setUserInfo(formData);
   popupWithEditForm.close();
 });
 
@@ -94,12 +86,14 @@ const popupWithAddForm = new PopupWithForm("#add-card-modal", () => {
   const name = titleInput.value;
   const link = linkInput.value;
   const cardData = { name, link };
-  renderCard(cardData, cardContainer);
+  const cardElement = createCard(cardData);
+  cardSection.addItem(cardElement);
   popupWithAddForm.close();
   cardForm.reset();
   formValidators["card-form"].disableButton();
 });
 popupWithAddForm.setEventListeners();
+
 buttonAdd.addEventListener("click", function () {
   popupWithAddForm.open();
 });
