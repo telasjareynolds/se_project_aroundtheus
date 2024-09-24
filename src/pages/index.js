@@ -24,7 +24,9 @@ import UserInfo from "../components/UserInfo.js";
 /*-----------------------------------------------------------------*/
 
 function createCard(data) {
-  const cardElement = new Card(data, cardSelector, handleImageClick);
+  const cardElement = new Card(data, cardSelector, (imgData) => {
+    imagePopup.open(imgData)
+  });
   return cardElement.cardView();
 }
 
