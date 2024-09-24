@@ -16,9 +16,9 @@ export default class UserInfo {
     //takes new user data and adds to page
     //use after successful profile form submission
     this.profileName.textContent =
-      data.name;
+      data.title;
 
     this.profileJob.textContent =
-      data.job;
+      data.description;
   }
 }
