@@ -25,7 +25,7 @@ import UserInfo from "../components/UserInfo.js";
 
 function createCard(data) {
   const cardElement = new Card(data, cardSelector, (imgData) => {
-    imagePopup.open(imgData)
+    imagePopup.open(imgData);
   });
   return cardElement.cardView();
 }
@@ -49,7 +49,6 @@ const enableValidation = (settings) => {
 
 enableValidation(settings);
 
-
 // Section class Instance
 const cardSection = new Section(
   {
@@ -62,15 +61,20 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 
-// UserInfo class instance 
-const userInfo = new UserInfo({profileName: "#profile_name", profileJob: "#profile_job"});
+// UserInfo class instance
+const userInfo = new UserInfo({
+  profileName: "#profile_name",
+  profileJob: "#profile_job",
+});
 
 // Edit modal instance
-const popupWithEditForm = new PopupWithForm("#profile-edit-modal", () => {
-  const formData = popupWithEditForm._getInputValues();
-  userInfo.setUserInfo(formData);
-  popupWithEditForm.close();
-});
+const popupWithEditForm = new PopupWithForm(
+  "#profile-edit-modal",
+  (formData) => {
+    userInfo.setUserInfo(formData);
+    popupWithEditForm.close();
+  }
+);
 
 popupWithEditForm.setEventListeners();
 
@@ -81,12 +85,10 @@ buttonEdit.addEventListener("click", () => {
   jobInput.value = userData.job;
   popupWithEditForm.open();
 });
+
 // Add modal instance
-const popupWithAddForm = new PopupWithForm("#add-card-modal", () => {
-  const name = titleInput.value;
-  const link = linkInput.value;
-  const cardData = { name, link };
-  const cardElement = createCard(cardData);
+const popupWithAddForm = new PopupWithForm("#add-card-modal", (formData) => {
+  const cardElement = createCard(formData);
   cardSection.addItem(cardElement);
   popupWithAddForm.close();
   cardForm.reset();
@@ -99,7 +101,5 @@ buttonAdd.addEventListener("click", function () {
 });
 
 // Preview image modal instance
-const imagePopup = new PopupWithImage('#modal-preview-img');
+const imagePopup = new PopupWithImage("#modal-preview-img");
 imagePopup.setEventListeners();
-
-
