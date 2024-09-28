@@ -1,28 +1,19 @@
 export default class Api {
-constructor() {
-    this.baseUrl = "https://around-api.en.tripleten-services.com/v1";
-    this._headers = {
-      "Content-Type": "application/json",
-      authorization: "abe8d1d8-efa1-44cc-9410-8e0017a1a66e"
-    }
+constructor(options) {
+    this.baseUrl = options.baseUrl;
+    this._headers = options.headers;
 }
 
 
-getUserInfo(name, about, avatar, id) {
+getUserInfo() {
   //Cards should be rendered after the user information is received from the server.
   // Сreate a function in Api.js and return the Promise.all() method. Pass the array of function calls for getting user information and the list of cards to Promise.all() as a parameter.  
   
   return fetch(`${this.baseUrl}/users/me`, {
+      method: "GET",
       headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        about: about, 
-        avatar: avatar, 
-        _id: id
-      }),
-  })
-
-  .then(res => {
+      })
+   .then(res => {
     if (res.ok) {
       return res.json();
     }
@@ -50,6 +41,7 @@ modifyUserProfile({name, about}) {
 
 getInitialCards() {
   return fetch(`${this.baseUrl}/cards`, {
+    method: "GET",
     headers: this._headers
         })
           .then(res => {

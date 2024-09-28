@@ -1,5 +1,12 @@
 export const cardSelector = '#card-template';
-const baseUrl = "https://around-api.en.tripleten-services.com/v1";
+
+export const apiOptions = {
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "abe8d1d8-efa1-44cc-9410-8e0017a1a66e",
+    'Content-Type': 'application/json'
+  }
+}
 
 export const initialCards = [
   {

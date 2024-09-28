@@ -3,14 +3,14 @@ export default class Card {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
-    this._cardSelector = cardSelector; 
+    this.cardSelector = cardSelector; 
     this._element = this._getTemplate();
     this._handleImageClick = handleImageClick;
     this._cardLikeBtn = this._element.querySelector(".card__like-button");
   }
 
   _getTemplate() {
- const cardTemplate = document.querySelector(this._cardSelector).content.querySelector(".card").cloneNode(true);
+ const cardTemplate = document.querySelector(this.cardSelector).content.querySelector(".card").cloneNode(true);
  return cardTemplate;
   }
   

@@ -11,7 +11,8 @@ import {
   buttonAdd,
   nameInput,
   jobInput,
-  confirmDeleteBtn,
+  confirmDeleteBtn, 
+  apiOptions
 } from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -19,7 +20,7 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import Popup from "../components/Popup.js";
-import PopupConfirmDelete from "../components/PopupToDelete.js";
+import PopupConfirmDelete from "../components/PopupConfirmDelete.js";
 /*-----------------------------------------------------------------*/
 /*                           Functions                             */
 /*-----------------------------------------------------------------*/
@@ -35,10 +36,10 @@ function createCard(data) {
 
 //Cards should be rendered after the user information is received from the server.
 
-const api = new Api();
+const api = new Api(apiOptions);
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-.then(([userData, cardsData]) =>{
+.then(([userData, cardsData]) => {
     document.getElementById('profile__avatar').src = userData.avatar;
     document.getElementById('profile-name').textContent = userData.name;
     document.getElementById('profile-title').textContent = userData.about;
