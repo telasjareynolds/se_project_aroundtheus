@@ -19,12 +19,12 @@ export default class Card {
     this._cardLikeBtn.addEventListener('click', () =>
         this._handleCardLike());
 
-      this._element.querySelector("#card-delete-btn").addEventListener('click', () =>
-        this._handleCardDelete());
+      document.querySelector("#card-delete-btn").addEventListener("click", () => this._handleCardDelete());
 
       // pass data to the image click handler
       this._element.querySelector('.card__image').addEventListener('click', () => 
          this._handleImageClick(this._data));
+
   }
 
   _handleCardLike() {
@@ -48,5 +48,9 @@ export default class Card {
 
    this._setEventListeners();
    return this._element;
+  }
+
+  getId() {
+    return this._data._id;
   }
 }

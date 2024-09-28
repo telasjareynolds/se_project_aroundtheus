@@ -20,6 +20,7 @@
             src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="Avatar"
             class="profile__image"
+            id="profile__avatar"
           />
           <div class="profile__info">
             <h1 class="profile__heading" id="profile_name">Jacques Cousteau</h1>
@@ -133,6 +134,51 @@
       </div>
     </div>
 
+ <!---- Confirm Delete Modal ---->
+    <div class="modal" id="confirm-delete-modal">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <p class="modal__title">Are you sure?</p>
+        <form
+          class="modal__form js-modal-form"
+        >
+          <button type="submit" class="modal__button" id="card-delete-btn">
+            Yes
+          </button>
+        </form>
+        <!-- </form> -->
+      </div>
+    </div>
+    
+     <!---- Edit Profile Image Modal ---->
+     <div class="modal" id="edit-avatar-modal">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>Change profile picture</p>
+        <form
+          class="modal__form js-modal-form"
+        >
+        <label class="modal__label">
+          <input
+            required
+            type="url"
+            name="link"
+            class="modal__input"
+            id="avatar-link"
+            placeholder="Image link"
+          />
+          <span class="modal__error" id="card-link-error"
+            >Please enter a web address.</span
+          >
+        </label>
+          <button type="submit" class="modal__button" id="save-avatar-btn">
+            Save
+          </button>
+        </form>
+        <!-- </form> -->
+      </div>
+    </div>
+
+
     <figure>
       <div class="modal" id="modal-preview-img">
         <div class="modal__container modal__container_type_preview">
@@ -152,7 +198,7 @@
         <img src="" alt="" class="card__image" />
         <button
           class="card_trash-button"
-          id="card-delete-btn"
+          id="card-trash-btn"
           type="button"
         ></button>
         <div class="card__description">

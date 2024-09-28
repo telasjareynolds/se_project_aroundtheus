@@ -1,4 +1,5 @@
 export const cardSelector = '#card-template';
+const baseUrl = "https://around-api.en.tripleten-services.com/v1";
 
 export const initialCards = [
   {
@@ -39,9 +40,11 @@ export const initialCards = [
 /*-----------------------------------------------------------------*/
 /*                            Elements                             */
  /*-----------------------------------------------------------------*/
+
+export const confirmDeleteBtn = document.querySelector("#card-delete-btn");
 export const buttonEdit = document.querySelector('#js-edit-button');
 export const buttonAdd = document.querySelector('#js-add-button');
-export const closeButtons = document.querySelectorAll('.modal__close');
+
 
 export const profileEditModal = document.querySelector('#profile-edit-modal');
 export const profileForm = document.forms["profile-form"];

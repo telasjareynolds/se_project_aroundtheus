@@ -8,17 +8,18 @@ import {
   cardForm,
   settings,
   buttonEdit,
-  titleInput,
   buttonAdd,
-  linkInput,
   nameInput,
   jobInput,
+  confirmDeleteBtn,
 } from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-
+import Api from "../components/Api.js";
+import Popup from "../components/Popup.js";
+import PopupConfirmDelete from "../components/PopupToDelete.js";
 /*-----------------------------------------------------------------*/
 /*                           Functions                             */
 /*-----------------------------------------------------------------*/
@@ -29,6 +30,25 @@ function createCard(data) {
   });
   return cardElement.cardView();
 }
+
+
+
+//Cards should be rendered after the user information is received from the server.
+
+const api = new Api();
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+.then(([userData, cardsData]) =>{
+    document.getElementById('profile__avatar').src = userData.avatar;
+    document.getElementById('profile-name').textContent = userData.name;
+    document.getElementById('profile-title').textContent = userData.about;
+    
+    cardSection.renderItems(cardsData);
+  })
+  .catch((err) => {
+    console.error('Error:', err);
+  })
+
 
 /*----------------------------------------------------------------*/
 /*                         Validation                          */
@@ -49,17 +69,28 @@ const enableValidation = (settings) => {
 
 enableValidation(settings);
 
-// Section class Instance
+/*-----------------------------------------------------------------*/
+/*             Class Instances                          */
+/*-----------------------------------------------------------------*/
+
+//  API instance
+
+
+
+
+
+
+
+// Section instance
 const cardSection = new Section(
   {
-    items: initialCards,
+    items: [],
     renderer: (data) => {
       cardSection.addItem(createCard(data));
     },
   },
   cardContainer
 );
-cardSection.renderItems();
 
 // UserInfo class instance
 const userInfo = new UserInfo({
@@ -103,3 +134,11 @@ buttonAdd.addEventListener("click", function () {
 // Preview image modal instance
 const imagePopup = new PopupWithImage("#modal-preview-img");
 imagePopup.setEventListeners();
+
+// Confirm delete modal instance
+const confirmDeleteModal = new PopupConfirmDelete("#confirm-delete-modal");
+
+confirmDeleteModal.setEventListeners();
+
+
+
