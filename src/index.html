@@ -16,12 +16,15 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
+          <div class="profile__avatar-container">
+            <img
             src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="Avatar"
             class="profile__image"
             id="profile__avatar"
-          />
+            />
+            <button class="profile__avatar-edit-btn"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__heading" id="profile_name">Jacques Cousteau</h1>
             <button
@@ -103,7 +106,7 @@
             <input
               required
               type="text"
-              name="title"
+              name="name"
               class="modal__input"
               id="card-name"
               placeholder="Title"

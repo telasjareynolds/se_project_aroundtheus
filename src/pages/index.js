@@ -11,8 +11,8 @@ import {
   buttonAdd,
   nameInput,
   jobInput,
-  confirmDeleteBtn, 
-  apiOptions
+  confirmDeleteBtn,
+  apiOptions,
 } from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -26,45 +26,48 @@ import PopupConfirmDelete from "../components/PopupConfirmDelete.js";
 /*-----------------------------------------------------------------*/
 
 function createCard(data) {
-  const cardElement = new Card(data, cardSelector, (imgData) => {
-    imagePopup.open(imgData);
-  }, handleCardDelete);
+  const cardElement = new Card(
+    data,
+    cardSelector,
+    (imgData) => {
+      imagePopup.open(imgData);
+    },
+    handleCardDelete
+  );
   return cardElement.cardView();
 }
 
-function handleCardDelete(card){
+function handleCardDelete(card) {
   confirmDeleteModal.setSubmitFunction(() => {
-    api.deleteCard(card.getId())
-    .then(() => {
-      //remove card from DOM
-      card.deleteCard();
-      confirmDeleteModal.close();
-    })
-    .catch((err) => {
-      console.error('Error deleting card', err);
-    });
+    api
+      .deleteCard(card.getId())
+      .then(() => {
+        //remove card from DOM
+        card.deleteCard();
+        confirmDeleteModal.close();
+      })
+      .catch((err) => {
+        console.error("Error deleting card", err);
+      });
   });
   confirmDeleteModal.open();
 }
-
-
 
 //Cards should be rendered after the user information is received from the server.
 
 const api = new Api(apiOptions);
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-.then(([userData, cardsData]) => {
-    document.getElementById('profile__avatar').src = userData.avatar;
-    document.getElementById('profile-name').textContent = userData.name;
-    document.getElementById('profile-title').textContent = userData.about;
-    
+  .then(([userData, cardsData]) => {
+    document.getElementById("profile__avatar").src = userData.avatar;
+    document.getElementById("profile-name").textContent = userData.name;
+    document.getElementById("profile-title").textContent = userData.about;
+
     cardSection.renderItems(cardsData);
   })
   .catch((err) => {
-    console.error('Error:', err);
-  })
-
+    console.error("Error:", err);
+  });
 
 /*----------------------------------------------------------------*/
 /*                         Validation                          */
@@ -91,18 +94,12 @@ enableValidation(settings);
 
 //  API instance
 
-
-
-
-
-
-
 // Section instance
 const cardSection = new Section(
   {
     items: [],
     renderer: (data) => {
-      cardSection.addItem(createCard(data));
+      cardSection.addItem(createCard(data), "append");
     },
   },
   cardContainer
@@ -135,11 +132,16 @@ buttonEdit.addEventListener("click", () => {
 
 // Add modal instance
 const popupWithAddForm = new PopupWithForm("#add-card-modal", (formData) => {
-  const cardElement = createCard(formData);
-  cardSection.addItem(cardElement);
-  popupWithAddForm.close();
-  cardForm.reset();
-  formValidators["card-form"].disableButton();
+  api
+    .createCard(formData)
+    .then((data) => {
+      const cardElement = createCard(data);
+      cardSection.addItem(cardElement);
+      popupWithAddForm.close();
+      cardForm.reset();
+      formValidators["card-form"].disableButton();
+    })
+    .catch((err) => console.error(err));
 });
 popupWithAddForm.setEventListeners();
 
@@ -155,6 +157,3 @@ imagePopup.setEventListeners();
 const confirmDeleteModal = new PopupConfirmDelete("#confirm-delete-modal");
 
 confirmDeleteModal.setEventListeners();
-
-
-
