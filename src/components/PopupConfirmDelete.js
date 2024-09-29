@@ -1,21 +1,22 @@
 import Popup from "./Popup.js";
 
-class PopupConfirmDelete extends Popup {
-  constructor(popupSelector, cardSelector) {
+export default class PopupConfirmDelete extends Popup {
+  constructor(popupSelector) {
     super(popupSelector); 
-    this.cardSelector = cardSelector;
   }
 
 
   setEventListeners() {
-    this.cardSelector.querySelector(".card_trash-button").addEventListener("click", () => {
-      super.open(this._popupElement);
-    }); // Add event listener to delete button
-
+    this._popupElement.querySelector(".modal__form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      this._handleSubmitFuntion();
+    }) // Add event listener to delete button
 
     // Call the parent class's event listeners to open and close the modal
     super.setEventListeners();
   }
-}
 
-export default PopupConfirmDelete;
+  setSubmitFunction(submitFunction) {
+    this._handleSubmitFuntion = submitFunction;
+  }
+}

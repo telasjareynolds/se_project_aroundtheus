@@ -19,7 +19,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
-import Popup from "../components/Popup.js";
+// import Popup from "../components/Popup.js";
 import PopupConfirmDelete from "../components/PopupConfirmDelete.js";
 /*-----------------------------------------------------------------*/
 /*                           Functions                             */
@@ -28,8 +28,23 @@ import PopupConfirmDelete from "../components/PopupConfirmDelete.js";
 function createCard(data) {
   const cardElement = new Card(data, cardSelector, (imgData) => {
     imagePopup.open(imgData);
-  });
+  }, handleCardDelete);
   return cardElement.cardView();
+}
+
+function handleCardDelete(card){
+  confirmDeleteModal.setSubmitFunction(() => {
+    api.deleteCard(card.getId())
+    .then(() => {
+      //remove card from DOM
+      card.deleteCard();
+      confirmDeleteModal.close();
+    })
+    .catch((err) => {
+      console.error('Error deleting card', err);
+    });
+  });
+  confirmDeleteModal.open();
 }
 
 
