@@ -2,7 +2,6 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import "../pages/index.css";
 import {
-  initialCards,
   cardContainer,
   cardSelector,
   cardForm,
@@ -11,8 +10,10 @@ import {
   buttonAdd,
   nameInput,
   jobInput,
-  confirmDeleteBtn,
+  changeAvatarbtn,
   apiOptions,
+  avatarInput,
+  savingBtn,
 } from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -32,11 +33,16 @@ function createCard(data) {
     (imgData) => {
       imagePopup.open(imgData);
     },
-    handleCardDelete
+    handleCardDelete,
+    handleCardLike
   );
   return cardElement.cardView();
 }
 
+// Api instances
+const api = new Api(apiOptions);
+
+// delete card instance
 function handleCardDelete(card) {
   confirmDeleteModal.setSubmitFunction(() => {
     api
@@ -53,9 +59,28 @@ function handleCardDelete(card) {
   confirmDeleteModal.open();
 }
 
+// Confirm delete modal instance
+const confirmDeleteModal = new PopupConfirmDelete("#confirm-delete-modal");
+
+confirmDeleteModal.setEventListeners();
+
 //Cards should be rendered after the user information is received from the server.
 
-const api = new Api(apiOptions);
+function getUserData() {
+  api
+    .getUserInfo()
+    .then((data) => {
+      userInfo.setUserInfo(data);
+    })
+    .catch((err) => console.error(err));
+}
+getUserData();
+
+// UserInfo class instance
+const userInfo = new UserInfo({
+  profileName: "#profile_name",
+  profileJob: "#profile_job",
+});
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
@@ -68,6 +93,24 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .catch((err) => {
     console.error("Error:", err);
   });
+
+function handleCardLike(card) {
+  api
+    .addCardLike(card.getId())
+    .then((cardData) => {
+      card.handleCardLike(cardData);
+    })
+    .catch((err) => console.error(err));
+}
+
+function removeCardLike(card) {
+  api
+    .removeCardLike(card.getId())
+    .then((cardData) => {
+      card.handleCardLike(cardData);
+    })
+    .catch((err) => console.error(err));
+}
 
 /*----------------------------------------------------------------*/
 /*                         Validation                          */
@@ -92,8 +135,6 @@ enableValidation(settings);
 /*             Class Instances                          */
 /*-----------------------------------------------------------------*/
 
-//  API instance
-
 // Section instance
 const cardSection = new Section(
   {
@@ -105,18 +146,53 @@ const cardSection = new Section(
   cardContainer
 );
 
-// UserInfo class instance
-const userInfo = new UserInfo({
-  profileName: "#profile_name",
-  profileJob: "#profile_job",
+// Edit Avatar instance
+const popupWithAvatarForm = new PopupWithForm(
+  "#edit-avatar-modal",
+  (formData) => {
+    savingBtn.textContent = "Saving...";
+    const avatarLink = formData.avatar;
+    api
+      .changeProfilePic(avatarLink)
+      .then((data) => {
+        document.getElementById("profile__avatar").src = data.avatar;
+        popupWithAvatarForm.close();
+      })
+      .catch((err) => console.error(err));
+  }
+);
+
+popupWithAvatarForm.setEventListeners();
+
+changeAvatarbtn.addEventListener("click", () => {
+  // assign them to the value of the corresponding input elements
+  api
+    .getUserInfo()
+    .then((userData) => {
+      avatarInput.value = userData.avatar;
+      popupWithAvatarForm.open();
+    })
+    .catch((err) => console.error(err))
+    .finally(() => {
+      savingBtn.textContent = "Create";
+    });
 });
 
 // Edit modal instance
 const popupWithEditForm = new PopupWithForm(
   "#profile-edit-modal",
   (formData) => {
-    userInfo.setUserInfo(formData);
-    popupWithEditForm.close();
+    savingBtn.textContent = "Saving...";
+    api
+      .modifyUserProfile(formData)
+      .then((data) => {
+        userInfo.setUserInfo(data);
+        popupWithEditForm.close();
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        savingBtn.textContent = "Create";
+      });
   }
 );
 
@@ -126,12 +202,13 @@ buttonEdit.addEventListener("click", () => {
   // assign them to the value of the corresponding input elements
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
-  jobInput.value = userData.job;
+  jobInput.value = userData.about;
   popupWithEditForm.open();
 });
 
 // Add modal instance
 const popupWithAddForm = new PopupWithForm("#add-card-modal", (formData) => {
+  savingBtn.textContent = "Saving...";
   api
     .createCard(formData)
     .then((data) => {
@@ -141,7 +218,10 @@ const popupWithAddForm = new PopupWithForm("#add-card-modal", (formData) => {
       cardForm.reset();
       formValidators["card-form"].disableButton();
     })
-    .catch((err) => console.error(err));
+    .catch((err) => console.error(err))
+    .finally(() => {
+      savingBtn.textContent = "Create";
+    });
 });
 popupWithAddForm.setEventListeners();
 
@@ -152,8 +232,3 @@ buttonAdd.addEventListener("click", function () {
 // Preview image modal instance
 const imagePopup = new PopupWithImage("#modal-preview-img");
 imagePopup.setEventListeners();
-
-// Confirm delete modal instance
-const confirmDeleteModal = new PopupConfirmDelete("#confirm-delete-modal");
-
-confirmDeleteModal.setEventListeners();

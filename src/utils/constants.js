@@ -51,6 +51,11 @@ export const initialCards = [
 export const confirmDeleteBtn = document.querySelector("#card-delete-btn");
 export const buttonEdit = document.querySelector('#js-edit-button');
 export const buttonAdd = document.querySelector('#js-add-button');
+export const changeAvatarbtn = document.querySelector('.profile__avatar-edit-btn');
+export const savingBtn = document.querySelector('.modal__save-button');
+
+
+
 
 
 export const profileEditModal = document.querySelector('#profile-edit-modal');
@@ -64,11 +69,14 @@ export const cardForm = document.forms["card-form"];
 export const previewImageModal = document.querySelector('#modal-preview-img');
 export const previewImageElement = document.querySelector('.js-modal-img-preview');
 export const previewImageCaption = previewImageModal.querySelector('#js-preview-caption');
+export const avatarModal = document.querySelector('#edit-avatar-modal');
 
-export const nameInput = profileEditModal.querySelector("[name='title']");
-export const jobInput = profileEditModal.querySelector("[name='description']");
+export const nameInput = profileEditModal.querySelector("[name='name']");
+export const jobInput = profileEditModal.querySelector("[name='about']");
+
 export const titleInput = addCardModal.querySelector("[name='title']");
 export const linkInput = addCardModal.querySelector("[name='link']");
+export const avatarInput = avatarModal.querySelector("[name='avatar']");
 
 export const cardContainer = document.querySelector('.cards__list');
 

@@ -8,15 +8,15 @@ export default class UserInfo {
     // returns object with user info
     return {
       name: this.profileName.textContent,
-      job: this.profileJob.textContent,
+      about: this.profileJob.textContent,
     };
   }
 
   setUserInfo(data) {
     //takes new user data and adds to page
     //use after successful profile form submission
-    this.profileName.textContent = data.title;
+    this.profileName.textContent = data.name;
 
-    this.profileJob.textContent = data.description;
+    this.profileJob.textContent = data.about;
   }
 }

@@ -55,7 +55,6 @@ export default class Api {
       {
         method: "DELETE",
         headers: this._headers,
-        // body: JSON.stringify(cardId),
       }
     ).then((res) => {
       if (res.ok) {
@@ -108,7 +107,9 @@ export default class Api {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify(link),
+      body: JSON.stringify({
+        avatar: link
+      }),
     }).then((res) => {
       if (res.ok) {
         return res.json();

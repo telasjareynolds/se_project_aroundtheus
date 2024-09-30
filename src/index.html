@@ -58,7 +58,7 @@
             <input
               required
               type="text"
-              name="title"
+              name="name"
               class="modal__input"
               id="profile-name"
               placeholder="Name"
@@ -74,7 +74,7 @@
             <input
               required
               type="text"
-              name="description"
+              name="about"
               id="profile-title"
               class="modal__input"
               placeholder="About me"
@@ -86,7 +86,7 @@
               >Please enter a web address.</span
             >
           </label>
-          <button type="submit" class="modal__button">Save</button>
+          <button type="submit" class="modal__button modal__save-button">Save</button>
         </form>
       </div>
     </div>
@@ -130,7 +130,7 @@
               >Please enter a web address.</span
             >
           </label>
-          <button type="submit" id="js-add-btn" class="modal__button" disabled>
+          <button type="submit" id="js-add-btn" class="modal__button modal__save-button" disabled>
             Create
           </button>
         </form>
@@ -156,7 +156,8 @@
      <!---- Edit Profile Image Modal ---->
      <div class="modal" id="edit-avatar-modal">
       <div class="modal__container">
-        <button class="modal__close" type="button"></button>Change profile picture</p>
+        <button class="modal__close" type="button"></button>
+        <p class="modal__title">Change profile picture</p>
         <form
           class="modal__form js-modal-form"
         >
@@ -164,16 +165,16 @@
           <input
             required
             type="url"
-            name="link"
+            name="avatar"
             class="modal__input"
             id="avatar-link"
-            placeholder="Image link"
+            placeholder="Avatar URL"
           />
-          <span class="modal__error" id="card-link-error"
+          <span class="modal__error" id="avatar-link-error"
             >Please enter a web address.</span
           >
         </label>
-          <button type="submit" class="modal__button" id="save-avatar-btn">
+          <button type="submit" class="modal__button modal__save-button" id="save-avatar-btn">
             Save
           </button>
         </form>
