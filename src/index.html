@@ -18,21 +18,24 @@
         <section class="profile">
           <div class="profile__avatar-container">
             <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="Avatar"
-            class="profile__image"
-            id="profile__avatar"
+              src=""
+              alt="Avatar"
+              class="profile__image"
+              id="profile__avatar"
             />
-            <button class="profile__avatar-edit-btn"></button>
+            <button
+              class="profile__avatar-edit-btn"
+              id="js-change-avatar-btn"
+            ></button>
           </div>
           <div class="profile__info">
-            <h1 class="profile__heading" id="profile_name">Jacques Cousteau</h1>
+            <h1 class="profile__heading" id="profile_name"></h1>
             <button
               class="profile__edit-button"
               id="js-edit-button"
               type="button"
             ></button>
-            <p class="profile__description" id="profile_job">Explorer</p>
+            <p class="profile__description" id="profile_job"></p>
           </div>
           <button
             class="profile__add-button"
@@ -62,7 +65,6 @@
               class="modal__input"
               id="profile-name"
               placeholder="Name"
-              value="Jacques Cousteau"
               minlength="2"
               maxlength="40"
             />
@@ -77,8 +79,7 @@
               name="about"
               id="profile-title"
               class="modal__input"
-              placeholder="About me"
-              value="Explorer"
+              placeholder="Description"
               minlength="2"
               maxlength="200"
             />
@@ -86,7 +87,7 @@
               >Please enter a web address.</span
             >
           </label>
-          <button type="submit" class="modal__button modal__save-button">Save</button>
+          <button type="submit" class="modal__button">Save</button>
         </form>
       </div>
     </div>
@@ -130,21 +131,19 @@
               >Please enter a web address.</span
             >
           </label>
-          <button type="submit" id="js-add-btn" class="modal__button modal__save-button" disabled>
+          <button type="submit" id="js-add-btn" class="modal__button" disabled>
             Create
           </button>
         </form>
       </div>
     </div>
 
- <!---- Confirm Delete Modal ---->
+    <!---- Confirm Delete Modal ---->
     <div class="modal" id="confirm-delete-modal">
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
         <p class="modal__title">Are you sure?</p>
-        <form
-          class="modal__form js-modal-form"
-        >
+        <form class="modal__form js-modal-form">
           <button type="submit" class="modal__button" id="card-delete-btn">
             Yes
           </button>
@@ -152,36 +151,33 @@
         <!-- </form> -->
       </div>
     </div>
-    
-     <!---- Edit Profile Image Modal ---->
-     <div class="modal" id="edit-avatar-modal">
+
+    <!---- Edit Profile Image Modal ---->
+    <div class="modal" id="edit-avatar-modal">
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
         <p class="modal__title">Change profile picture</p>
-        <form
-          class="modal__form js-modal-form"
-        >
-        <label class="modal__label">
-          <input
-            required
-            type="url"
-            name="avatar"
-            class="modal__input"
-            id="avatar-link"
-            placeholder="Avatar URL"
-          />
-          <span class="modal__error" id="avatar-link-error"
-            >Please enter a web address.</span
-          >
-        </label>
-          <button type="submit" class="modal__button modal__save-button" id="save-avatar-btn">
+        <form class="modal__form js-modal-form">
+          <label class="modal__label">
+            <input
+              required
+              type="url"
+              name="avatar"
+              class="modal__input"
+              id="avatar-link"
+              placeholder="Avatar URL"
+            />
+            <span class="modal__error" id="avatar-link-error"
+              >Please enter a web address.</span
+            >
+          </label>
+          <button type="submit" class="modal__button" id="save-avatar-btn">
             Save
           </button>
         </form>
         <!-- </form> -->
       </div>
     </div>
-
 
     <figure>
       <div class="modal" id="modal-preview-img">

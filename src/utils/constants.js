@@ -51,11 +51,7 @@ export const initialCards = [
 export const confirmDeleteBtn = document.querySelector("#card-delete-btn");
 export const buttonEdit = document.querySelector('#js-edit-button');
 export const buttonAdd = document.querySelector('#js-add-button');
-export const changeAvatarbtn = document.querySelector('.profile__avatar-edit-btn');
-export const savingBtn = document.querySelector('.modal__save-button');
-
-
-
+export const changeAvatarBtn = document.querySelector('#js-change-avatar-btn');
 
 
 export const profileEditModal = document.querySelector('#profile-edit-modal');
