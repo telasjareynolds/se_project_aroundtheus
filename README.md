@@ -21,4 +21,4 @@ Make the project functional in the future using JavaScript. In the future, I'd a
 
 GitHub Page's URL https://telasjareynolds.github.io/se_project_aroundtheus/
 
-Video overview of project: https://drive.google.com/drive/folders/1ytmeZ2HwJXCirsZ63BGF-8NjaYOet4X6?usp=sharing
+Video overview of project: https://www.loom.com/share/4c189a72c7fb42a284eb5d6dabba7933?sid=89b424bc-15a4-4633-9df8-80ec6f2f5ae1

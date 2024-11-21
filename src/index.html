@@ -16,19 +16,26 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="Avatar"
-            class="profile__image"
-          />
+          <div class="profile__avatar-container">
+            <img
+              src=""
+              alt="Avatar"
+              class="profile__image"
+              id="profile__avatar"
+            />
+            <button
+              class="profile__avatar-edit-btn"
+              id="js-change-avatar-btn"
+            ></button>
+          </div>
           <div class="profile__info">
-            <h1 class="profile__heading" id="profile_name">Jacques Cousteau</h1>
+            <h1 class="profile__heading" id="profile_name"></h1>
             <button
               class="profile__edit-button"
               id="js-edit-button"
               type="button"
             ></button>
-            <p class="profile__description" id="profile_job">Explorer</p>
+            <p class="profile__description" id="profile_job"></p>
           </div>
           <button
             class="profile__add-button"
@@ -54,11 +61,10 @@
             <input
               required
               type="text"
-              name="title"
+              name="name"
               class="modal__input"
               id="profile-name"
               placeholder="Name"
-              value="Jacques Cousteau"
               minlength="2"
               maxlength="40"
             />
@@ -70,11 +76,10 @@
             <input
               required
               type="text"
-              name="description"
+              name="about"
               id="profile-title"
               class="modal__input"
-              placeholder="About me"
-              value="Explorer"
+              placeholder="Description"
               minlength="2"
               maxlength="200"
             />
@@ -133,6 +138,47 @@
       </div>
     </div>
 
+    <!---- Confirm Delete Modal ---->
+    <div class="modal" id="confirm-delete-modal">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <p class="modal__title">Are you sure?</p>
+        <form class="modal__form js-modal-form">
+          <button type="submit" class="modal__button" id="card-delete-btn">
+            Yes
+          </button>
+        </form>
+        <!-- </form> -->
+      </div>
+    </div>
+
+    <!---- Edit Profile Image Modal ---->
+    <div class="modal" id="edit-avatar-modal">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <p class="modal__title">Change profile picture</p>
+        <form class="modal__form js-modal-form">
+          <label class="modal__label">
+            <input
+              required
+              type="url"
+              name="avatar"
+              class="modal__input"
+              id="avatar-link"
+              placeholder="Avatar URL"
+            />
+            <span class="modal__error" id="avatar-link-error"
+              >Please enter a web address.</span
+            >
+          </label>
+          <button type="submit" class="modal__button" id="save-avatar-btn">
+            Save
+          </button>
+        </form>
+        <!-- </form> -->
+      </div>
+    </div>
+
     <figure>
       <div class="modal" id="modal-preview-img">
         <div class="modal__container modal__container_type_preview">
@@ -152,7 +198,7 @@
         <img src="" alt="" class="card__image" />
         <button
           class="card_trash-button"
-          id="card-delete-btn"
+          id="card-trash-btn"
           type="button"
         ></button>
         <div class="card__description">

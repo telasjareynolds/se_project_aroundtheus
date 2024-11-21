@@ -8,6 +8,10 @@
   overflow: hidden;
 }
 
+.profile__avatar-container {
+  position: relative;
+}
+
 .profile__image {
   max-width: 120px;
   max-height: 120px;
@@ -15,6 +19,21 @@
   margin-right: 30px;
   object-fit: cover;
   background-position: center;
+}
+
+.profile__avatar-edit-btn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 50%;
+  background: rgb(0 0 0 / .8) url(../images/edit-hover.svg) center no-repeat;
+  opacity: 0;
+}
+
+.profile__avatar-edit-btn:hover {
+  opacity: 1;
 }
 
 .profile__info {
