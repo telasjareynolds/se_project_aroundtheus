@@ -1,6 +1,6 @@
 # Around The U.S.
 
-This is project 3 of the Software Engineering program at TripleTen. It was created using HTML, CSS, Javascript, and object-oriented programing following a figma design. It has a profile section with a customizable title, description, and button that allows for adding personalized images. If you are looking to create a profile where all you'll need to do is add your own personal touch, this ready to use template will make the process seamless!
+This is project 3 of the Software Engineering program at TripleTen. It was created using HTML, CSS, Javascript, and object-oriented programming following a Figma design. It has a profile section with a customizable title, description, and button that allows for adding personalized images. It also utilizes REST API to store all profile information on a server. If you are looking to create a profile where all you'll need to do is add your own personal touch, this ready-to-use template will make the process seamless! 
 
 ## Project features
 
@@ -13,6 +13,7 @@ This is project 3 of the Software Engineering program at TripleTen. It was creat
 - Responsive for desktop, tablet, and mobile
 - JavaScript
 - Object-oriented programming
+- REST API
 
 ## Plan on improving the project
 
